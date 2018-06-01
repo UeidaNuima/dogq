@@ -128,5 +128,5 @@ class Bot {
         this.server.bind(this.selfServerPort);
     }
 }
-exports.default = Bot;
 module.exports = Bot;
+exports.default = Bot;

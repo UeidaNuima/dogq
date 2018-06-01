@@ -161,5 +161,5 @@ class Bot {
   }
 }
 
-export default Bot;
 module.exports = Bot;
+export default Bot;
