@@ -9,6 +9,12 @@
     "email": "minalinskyx@hotmail.com"
   },
   "license": "WTFPL",
+  "keywords": ["bot", "qq", "coolq"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/moondropx/chiq.git"
+  },
+  "bugs": "https://github.com/moondropx/chiq/issues",
   "scripts": {
     "build": "tsc"
   },
