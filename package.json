@@ -1,5 +1,5 @@
 {
-  "name": "chiq",
+  "name": "dogq",
   "version": "0.1.0",
   "description": "A koa-like qq bot for coolq and node.",
   "main": "./dist/index.js",
@@ -12,9 +12,9 @@
   "keywords": ["bot", "qq", "coolq"],
   "repository": {
     "type": "git",
-    "url": "git://github.com/moondropx/chiq.git"
+    "url": "git://github.com/moondropx/dogq.git"
   },
-  "bugs": "https://github.com/moondropx/chiq/issues",
+  "bugs": "https://github.com/moondropx/dogq/issues",
   "scripts": {
     "build": "tsc"
   },
