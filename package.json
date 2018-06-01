@@ -1,6 +1,6 @@
 {
   "name": "dogq",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A koa-like qq bot for coolq and node.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,7 +9,11 @@
     "email": "minalinskyx@hotmail.com"
   },
   "license": "WTFPL",
-  "keywords": ["bot", "qq", "coolq"],
+  "keywords": [
+    "bot",
+    "qq",
+    "coolq"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/moondropx/dogq.git"
