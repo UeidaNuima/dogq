@@ -1,0 +1,25 @@
+{
+  "name": "chiq",
+  "version": "0.1.0",
+  "description": "A koa-like qq bot for coolq and node.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": {
+    "name": "MoonDropX",
+    "email": "minalinskyx@hotmail.com"
+  },
+  "license": "WTFPL",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "iconv-lite": "^0.4.23",
+    "koa-compose": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/koa-compose": "^3.2.2",
+    "@types/node": "^10.1.4",
+    "typescript": "^2.8.4"
+  }
+}
