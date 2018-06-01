@@ -12,7 +12,7 @@ export enum Level {
   OFF,
 }
 
-export default class Logger {
+export class Logger {
   public debug = this.log.bind(this, Level.DEBUG);
   public info = this.log.bind(this, Level.INFO);
   public warn = this.log.bind(this, Level.WARN);

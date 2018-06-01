@@ -1,6 +1,9 @@
 import Bot from '.';
 import { RecvMessage } from './cqsdk';
-export default class Context {
+/**
+ * Context class for a message.
+ */
+export declare class Context {
     bot: Bot;
     message: RecvMessage;
     match: any[];

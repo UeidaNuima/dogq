@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Context class for a message.
+ */
 class Context {
     constructor(bot, message) {
         this.bot = bot;
@@ -39,4 +42,4 @@ class Context {
         }
     }
 }
-exports.default = Context;
+exports.Context = Context;

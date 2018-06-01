@@ -1,5 +1,5 @@
-import { default as Logger, Level } from './logger';
-import Context from './context';
+import { Logger, Level } from './logger';
+import { Context } from './context';
 import { createSocket, Socket } from 'dgram';
 import * as cq from './cqsdk';
 import * as compose from 'koa-compose';
@@ -161,5 +161,7 @@ class Bot {
   }
 }
 
-module.exports = Bot;
+exports = module.exports = Bot; // a hack for both typescript and node
+export * from './cqsdk';
+export * from './logger';
 export default Bot;

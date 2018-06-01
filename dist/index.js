@@ -7,6 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("./logger");
 const context_1 = require("./context");
@@ -25,7 +28,7 @@ class Bot {
         const { targetServerPort = 11235, selfServerPort = 12450, logLevel, } = config;
         this.targetServerPort = targetServerPort;
         this.selfServerPort = selfServerPort;
-        this.logger = new logger_1.default(logLevel);
+        this.logger = new logger_1.Logger(logLevel);
     }
     /**
      * Send message to coolq host.
@@ -99,7 +102,7 @@ class Bot {
             // decode message
             const message = cq.decodeMessage(msg.toString());
             // create context
-            const ctx = new context_1.default(this, message);
+            const ctx = new context_1.Context(this, message);
             // assign user-defined context to ctx
             Object.assign(ctx, this.context);
             // log the receive message
@@ -128,5 +131,7 @@ class Bot {
         this.server.bind(this.selfServerPort);
     }
 }
-module.exports = Bot;
+exports = module.exports = Bot; // a hack for both typescript and node
+__export(require("./cqsdk"));
+__export(require("./logger"));
 exports.default = Bot;

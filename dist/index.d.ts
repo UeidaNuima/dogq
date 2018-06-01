@@ -1,6 +1,6 @@
 /// <reference types="koa-compose" />
-import { default as Logger, Level } from './logger';
-import Context from './context';
+import { Logger, Level } from './logger';
+import { Context } from './context';
 import * as cq from './cqsdk';
 import { Middleware } from 'koa-compose';
 /**
@@ -52,4 +52,6 @@ declare class Bot {
      */
     start(): void;
 }
+export * from './cqsdk';
+export * from './logger';
 export default Bot;

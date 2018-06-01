@@ -6,7 +6,10 @@ import {
   SentDiscussMessage,
 } from './cqsdk';
 
-export default class Context {
+/**
+ * Context class for a message.
+ */
+export class Context {
   public bot: Bot;
   public message: RecvMessage;
   public match: any[];

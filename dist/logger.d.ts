@@ -9,7 +9,7 @@ export declare enum Level {
     ERROR = 4,
     OFF = 5,
 }
-export default class Logger {
+export declare class Logger {
     debug: any;
     info: any;
     warn: any;
