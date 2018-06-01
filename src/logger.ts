@@ -25,7 +25,7 @@ export class Logger {
   }
 
   public log(level: Level, message: string | number) {
-    if (this.logLevel < level) {
+    if (this.logLevel <= level) {
       let castColor: any;
       switch (level) {
         case Level.DEBUG:
