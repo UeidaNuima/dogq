@@ -24,7 +24,9 @@ export interface Matcher {
  */
 declare class Bot {
     logger: Logger;
-    context: object;
+    context: {
+        [k: string]: any;
+    };
     private middleware;
     private server;
     private client;
