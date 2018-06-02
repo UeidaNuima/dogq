@@ -1,6 +1,6 @@
 {
   "name": "dogq",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A koa-like qq bot for coolq and node.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
