@@ -53,3 +53,8 @@ export class Context {
     }
   }
 }
+
+// make the interface extendable
+export interface IContext extends Context {
+  [name: string]: any;
+}

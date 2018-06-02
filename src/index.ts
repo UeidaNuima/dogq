@@ -1,5 +1,5 @@
 import { Logger, Level } from './logger';
-import { Context } from './context';
+import { Context, IContext } from './context';
 import { createSocket, Socket } from 'dgram';
 import * as cq from './cqsdk';
 import * as compose from 'koa-compose';
@@ -29,7 +29,7 @@ export interface Matcher {
 class Bot {
   public logger: Logger;
   public context: object = {};
-  private middleware: Array<Middleware<Context>> = [];
+  private middleware: Array<Middleware<IContext>> = [];
   private server: Socket = createSocket('udp4');
   private client: Socket = createSocket('udp4');
   private targetServerPort: number;
@@ -72,7 +72,7 @@ class Bot {
    * Add a middleware.
    * @param middleware middleware function
    */
-  public use(middleware: Middleware<Context>) {
+  public use(middleware: Middleware<IContext>) {
     this.middleware.push(middleware);
   }
 
@@ -81,31 +81,38 @@ class Bot {
    * @param filter filter conditions
    * @param middleware middleware function
    */
-  public on(matcher: Matcher, middleware: Middleware<Context>) {
-    this.middleware.push(async (ctx: Context, next: () => Promise<any>) => {
+  public on(
+    matcher: Matcher | ((message: cq.RecvMessage) => boolean),
+    middleware: Middleware<IContext>,
+  ) {
+    this.middleware.push(async (ctx: IContext, next: () => Promise<any>) => {
       let matched = true;
-      Object.keys(matcher).forEach(key => {
-        if (
-          ctx.message[key] &&
-          matcher[key] &&
-          ctx.message[key] !== matcher[key]
-        ) {
-          let pattern = matcher[key];
-          if (typeof pattern === 'string') {
-            pattern = new RegExp(pattern);
-          }
-          const match = ctx.message[key].match(pattern);
-          if (match) {
-            if (key === 'text') {
-              Object.assign(ctx, { match });
+      if (matcher instanceof Function) {
+        matched = matcher(ctx.message);
+      } else {
+        Object.keys(matcher).forEach(key => {
+          if (
+            ctx.message[key] &&
+            matcher[key] &&
+            ctx.message[key] !== matcher[key]
+          ) {
+            let pattern = matcher[key];
+            if (typeof pattern === 'string') {
+              pattern = new RegExp(pattern);
+            }
+            const match = ctx.message[key].match(pattern);
+            if (match) {
+              if (key === 'text') {
+                Object.assign(ctx, { match });
+              }
+            } else {
+              matched = false;
             }
           } else {
             matched = false;
           }
-        } else {
-          matched = false;
-        }
-      });
+        });
+      }
       if (matched) {
         await middleware(ctx, next);
       } else {

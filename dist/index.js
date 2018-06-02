@@ -61,28 +61,33 @@ class Bot {
     on(matcher, middleware) {
         this.middleware.push((ctx, next) => __awaiter(this, void 0, void 0, function* () {
             let matched = true;
-            Object.keys(matcher).forEach(key => {
-                if (ctx.message[key] &&
-                    matcher[key] &&
-                    ctx.message[key] !== matcher[key]) {
-                    let pattern = matcher[key];
-                    if (typeof pattern === 'string') {
-                        pattern = new RegExp(pattern);
-                    }
-                    const match = ctx.message[key].match(pattern);
-                    if (match) {
-                        if (key === 'text') {
-                            Object.assign(ctx, { match });
+            if (matcher instanceof Function) {
+                matched = matcher(ctx.message);
+            }
+            else {
+                Object.keys(matcher).forEach(key => {
+                    if (ctx.message[key] &&
+                        matcher[key] &&
+                        ctx.message[key] !== matcher[key]) {
+                        let pattern = matcher[key];
+                        if (typeof pattern === 'string') {
+                            pattern = new RegExp(pattern);
+                        }
+                        const match = ctx.message[key].match(pattern);
+                        if (match) {
+                            if (key === 'text') {
+                                Object.assign(ctx, { match });
+                            }
+                        }
+                        else {
+                            matched = false;
                         }
                     }
                     else {
                         matched = false;
                     }
-                }
-                else {
-                    matched = false;
-                }
-            });
+                });
+            }
             if (matched) {
                 yield middleware(ctx, next);
             }

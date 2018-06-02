@@ -14,3 +14,6 @@ export declare class Context {
      */
     reply(text: string): void;
 }
+export interface IContext extends Context {
+    [name: string]: any;
+}
