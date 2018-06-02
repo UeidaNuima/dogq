@@ -28,7 +28,7 @@ export interface Matcher {
  */
 class Bot {
   public logger: Logger;
-  public context: object = {};
+  public context: { [k: string]: any } = {};
   private middleware: Array<Middleware<IContext>> = [];
   private server: Socket = createSocket('udp4');
   private client: Socket = createSocket('udp4');
