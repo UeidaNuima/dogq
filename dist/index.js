@@ -66,17 +66,15 @@ class Bot {
                     ctx.message[key] &&
                     matcher[key] &&
                     ctx.message[key] !== matcher[key]) {
-                    matched = false;
-                }
-                // use regexp for text
-                if (key === 'text' && 'text' in ctx.message && matcher.text) {
-                    let pattern = matcher.text;
+                    let pattern = matcher[key];
                     if (typeof pattern === 'string') {
                         pattern = new RegExp(pattern);
                     }
-                    const match = ctx.message.text.match(pattern);
+                    const match = ctx.message[key].match(pattern);
                     if (match) {
-                        Object.assign(ctx, { match });
+                        if (key === 'text') {
+                            Object.assign(ctx, { match });
+                        }
                     }
                     else {
                         matched = false;

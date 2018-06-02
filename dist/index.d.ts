@@ -12,11 +12,11 @@ export interface Config {
     logLevel?: Level;
 }
 export interface Matcher {
-    type?: string;
-    QQ?: string;
-    groupID?: string;
-    discussID?: string;
-    operatedQQ?: string;
+    type?: RegExp | string;
+    QQ?: RegExp | string;
+    groupID?: RegExp | string;
+    discussID?: RegExp | string;
+    operatedQQ?: RegExp | string;
     text?: RegExp | string;
 }
 /**

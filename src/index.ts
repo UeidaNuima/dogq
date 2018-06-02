@@ -5,8 +5,6 @@ import * as cq from './cqsdk';
 import * as compose from 'koa-compose';
 import { Middleware } from 'koa-compose';
 
-// export type Middleware = (ctx: any, next: Middleware) => Promise<void> | void;
-
 /**
  * Constructor config interface.
  */
@@ -17,11 +15,11 @@ export interface Config {
 }
 
 export interface Matcher {
-  type?: string;
-  QQ?: string;
-  groupID?: string;
-  discussID?: string;
-  operatedQQ?: string;
+  type?: RegExp | string;
+  QQ?: RegExp | string;
+  groupID?: RegExp | string;
+  discussID?: RegExp | string;
+  operatedQQ?: RegExp | string;
   text?: RegExp | string;
 }
 
@@ -93,17 +91,15 @@ class Bot {
           matcher[key] &&
           ctx.message[key] !== matcher[key]
         ) {
-          matched = false;
-        }
-        // use regexp for text
-        if (key === 'text' && 'text' in ctx.message && matcher.text) {
-          let pattern = matcher.text;
+          let pattern = matcher[key];
           if (typeof pattern === 'string') {
             pattern = new RegExp(pattern);
           }
-          const match = ctx.message.text.match(pattern);
+          const match = ctx.message[key].match(pattern);
           if (match) {
-            Object.assign(ctx, { match });
+            if (key === 'text') {
+              Object.assign(ctx, { match });
+            }
           } else {
             matched = false;
           }
