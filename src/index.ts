@@ -160,4 +160,6 @@ class Bot {
 exports = module.exports = Bot; // a hack for both typescript and node
 export * from './cqsdk';
 export * from './logger';
+export * from './context';
+export { Middleware };
 export default Bot;

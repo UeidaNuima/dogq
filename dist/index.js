@@ -132,4 +132,5 @@ class Bot {
 exports = module.exports = Bot; // a hack for both typescript and node
 __export(require("./cqsdk"));
 __export(require("./logger"));
+__export(require("./context"));
 exports.default = Bot;

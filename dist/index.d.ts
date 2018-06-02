@@ -54,4 +54,6 @@ declare class Bot {
 }
 export * from './cqsdk';
 export * from './logger';
+export * from './context';
+export { Middleware };
 export default Bot;
