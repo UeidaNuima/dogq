@@ -62,8 +62,7 @@ class Bot {
         this.middleware.push((ctx, next) => __awaiter(this, void 0, void 0, function* () {
             let matched = true;
             Object.keys(matcher).forEach(key => {
-                if (key !== 'text' &&
-                    ctx.message[key] &&
+                if (ctx.message[key] &&
                     matcher[key] &&
                     ctx.message[key] !== matcher[key]) {
                     let pattern = matcher[key];
@@ -79,6 +78,9 @@ class Bot {
                     else {
                         matched = false;
                     }
+                }
+                else {
+                    matched = false;
                 }
             });
             if (matched) {

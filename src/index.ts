@@ -86,7 +86,6 @@ class Bot {
       let matched = true;
       Object.keys(matcher).forEach(key => {
         if (
-          key !== 'text' &&
           ctx.message[key] &&
           matcher[key] &&
           ctx.message[key] !== matcher[key]
@@ -103,6 +102,8 @@ class Bot {
           } else {
             matched = false;
           }
+        } else {
+          matched = false;
         }
       });
       if (matched) {
