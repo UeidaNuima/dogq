@@ -4,6 +4,7 @@ import { RecvMessage } from './cqsdk';
  * Context class for a message.
  */
 export declare class Context {
+    [name: string]: any;
     bot: Bot;
     message: RecvMessage;
     match: any[];
@@ -13,7 +14,4 @@ export declare class Context {
      * @param text reply text
      */
     reply(text: string): void;
-}
-export interface IContext extends Context {
-    [name: string]: any;
 }

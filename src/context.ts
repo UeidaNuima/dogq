@@ -10,6 +10,7 @@ import {
  * Context class for a message.
  */
 export class Context {
+  [name: string]: any;
   public bot: Bot;
   public message: RecvMessage;
   public match: any[];
@@ -52,9 +53,4 @@ export class Context {
         this.bot.logger.error('Replied unreplyable message.');
     }
   }
-}
-
-// make the interface extendable
-export interface IContext extends Context {
-  [name: string]: any;
 }

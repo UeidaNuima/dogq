@@ -1,6 +1,6 @@
 /// <reference types="koa-compose" />
 import { Logger, Level } from './logger';
-import { IContext } from './context';
+import { Context } from './context';
 import * as cq from './cqsdk';
 import { Middleware } from 'koa-compose';
 /**
@@ -42,13 +42,13 @@ declare class Bot {
      * Add a middleware.
      * @param middleware middleware function
      */
-    use(middleware: Middleware<IContext>): void;
+    use(middleware: Middleware<Context>): void;
     /**
      * Add a match middleware.
      * @param filter filter conditions
      * @param middleware middleware function
      */
-    on(matcher: Matcher | ((message: cq.RecvMessage) => boolean), middleware: Middleware<IContext>): void;
+    on(matcher: Matcher | ((message: cq.RecvMessage) => boolean), middleware: Middleware<Context>): void;
     /**
      * Start the server.
      */

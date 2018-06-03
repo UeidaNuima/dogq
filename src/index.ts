@@ -1,5 +1,5 @@
 import { Logger, Level } from './logger';
-import { Context, IContext } from './context';
+import { Context } from './context';
 import { createSocket, Socket } from 'dgram';
 import * as cq from './cqsdk';
 import * as compose from 'koa-compose';
@@ -29,7 +29,7 @@ export interface Matcher {
 class Bot {
   public logger: Logger;
   public context: { [k: string]: any } = {};
-  private middleware: Array<Middleware<IContext>> = [];
+  private middleware: Array<Middleware<Context>> = [];
   private server: Socket = createSocket('udp4');
   private client: Socket = createSocket('udp4');
   private targetServerPort: number;
@@ -72,7 +72,7 @@ class Bot {
    * Add a middleware.
    * @param middleware middleware function
    */
-  public use(middleware: Middleware<IContext>) {
+  public use(middleware: Middleware<Context>) {
     this.middleware.push(middleware);
   }
 
@@ -83,9 +83,9 @@ class Bot {
    */
   public on(
     matcher: Matcher | ((message: cq.RecvMessage) => boolean),
-    middleware: Middleware<IContext>,
+    middleware: Middleware<Context>,
   ) {
-    this.middleware.push(async (ctx: IContext, next: () => Promise<any>) => {
+    this.middleware.push(async (ctx: Context, next: () => Promise<any>) => {
       let matched = true;
       if (matcher instanceof Function) {
         matched = matcher(ctx.message);
