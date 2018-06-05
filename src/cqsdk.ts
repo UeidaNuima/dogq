@@ -255,3 +255,32 @@ export function encodeMessage(message: SentMessage) {
       return 'UnknownMessage';
   }
 }
+
+export abstract class CQMagic {
+  public static PATTERN: RegExp;
+  public abstract toString(): string;
+}
+
+export class CQImage extends CQMagic {
+  private image: string;
+  public static PATTERN = /\[CQ:image,file=(.+?)\]/;
+  constructor(image: string) {
+    super();
+    this.image = image;
+  }
+  public toString() {
+    return `[CQ:image,file=${this.image}]`;
+  }
+}
+
+export class CQAt extends CQMagic {
+  private QQ: string;
+  public static PATTERN = /\[cq:at,qq=(\d+?)\]/;
+  constructor(QQ: string) {
+    super();
+    this.QQ = QQ;
+  }
+  public toString() {
+    return `[CQ:at,qq=${this.QQ}]`;
+  }
+}

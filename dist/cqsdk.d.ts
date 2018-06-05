@@ -109,3 +109,19 @@ export declare type SentMessage = SentPrivateMessage | SentGroupMessage | SentDi
  * @param message sent message object
  */
 export declare function encodeMessage(message: SentMessage): string;
+export declare abstract class CQMagic {
+    static PATTERN: RegExp;
+    abstract toString(): string;
+}
+export declare class CQImage extends CQMagic {
+    private image;
+    static PATTERN: RegExp;
+    constructor(image: string);
+    toString(): string;
+}
+export declare class CQAt extends CQMagic {
+    private QQ;
+    static PATTERN: RegExp;
+    constructor(QQ: string);
+    toString(): string;
+}

@@ -100,3 +100,28 @@ function encodeMessage(message) {
     }
 }
 exports.encodeMessage = encodeMessage;
+class CQMagic {
+}
+exports.CQMagic = CQMagic;
+class CQImage extends CQMagic {
+    constructor(image) {
+        super();
+        this.image = image;
+    }
+    toString() {
+        return `[CQ:image,file=${this.image}]`;
+    }
+}
+CQImage.PATTERN = /\[CQ:image,file=(.+?)\]/;
+exports.CQImage = CQImage;
+class CQAt extends CQMagic {
+    constructor(QQ) {
+        super();
+        this.QQ = QQ;
+    }
+    toString() {
+        return `[CQ:at,qq=${this.QQ}]`;
+    }
+}
+CQAt.PATTERN = /\[cq:at,qq=(\d+?)\]/;
+exports.CQAt = CQAt;

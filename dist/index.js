@@ -25,20 +25,25 @@ class Bot {
         this.middleware = [];
         this.server = dgram_1.createSocket('udp4');
         this.client = dgram_1.createSocket('udp4');
-        const { targetServerPort = 11235, selfServerPort = 12450, logLevel, } = config;
+        const { targetServerPort = 11235, selfServerPort = 12450, logLevel, debug = false, } = config;
         this.targetServerPort = targetServerPort;
         this.selfServerPort = selfServerPort;
-        this.logger = new logger_1.Logger(logLevel);
+        this.logger = new logger_1.Logger(debug ? logger_1.Level.DEBUG : logLevel);
+        this.debug = debug;
     }
     /**
      * Send message to coolq host.
      * @param message message string that will be sent
      */
     send(message) {
+        // log the send message
+        this.logger.debug(`↗ ${message}`);
+        // messages won't be sent in debug mode
+        if (this.debug) {
+            return;
+        }
         // encode the message and send
         const encodedMessage = cq.encodeMessage(message);
-        // log the send message
-        this.logger.debug(`↗ ${encodedMessage}`);
         this.client.send(encodedMessage, this.targetServerPort, 'localhost', err => {
             // err will be Error or null
             if (err) {

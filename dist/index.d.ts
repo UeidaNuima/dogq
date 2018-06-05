@@ -10,6 +10,7 @@ export interface Config {
     targetServerPort?: number;
     selfServerPort?: number;
     logLevel?: Level;
+    debug?: boolean;
 }
 export interface Matcher {
     type?: RegExp | string;
@@ -32,6 +33,7 @@ declare class Bot {
     private client;
     private targetServerPort;
     private selfServerPort;
+    private debug;
     constructor(config?: Config);
     /**
      * Send message to coolq host.
