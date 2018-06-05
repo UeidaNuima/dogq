@@ -16,6 +16,7 @@ const context_1 = require("./context");
 const dgram_1 = require("dgram");
 const cq = require("./cqsdk");
 const compose = require("koa-compose");
+const util = require("util");
 /**
  * The main bot class.
  */
@@ -37,7 +38,7 @@ class Bot {
      */
     send(message) {
         // log the send message
-        this.logger.debug(`↗ ${message}`);
+        this.logger.debug(`↗ ${util.inspect(message, undefined, null, true)}`);
         // messages won't be sent in debug mode
         if (this.debug) {
             return;

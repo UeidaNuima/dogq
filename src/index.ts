@@ -3,6 +3,7 @@ import { Context } from './context';
 import { createSocket, Socket } from 'dgram';
 import * as cq from './cqsdk';
 import * as compose from 'koa-compose';
+import * as util from 'util';
 import { Middleware } from 'koa-compose';
 
 /**
@@ -56,7 +57,7 @@ class Bot {
    */
   public send(message: cq.SentMessage) {
     // log the send message
-    this.logger.debug(`↗ ${message}`);
+    this.logger.debug(`↗ ${util.inspect(message, undefined, null, true)}`);
     // messages won't be sent in debug mode
     if (this.debug) {
       return;
