@@ -12,6 +12,7 @@ export interface Config {
   targetServerPort?: number;
   selfServerPort?: number;
   logLevel?: Level;
+  debug?: boolean;
 }
 
 export interface Matcher {
@@ -34,16 +35,19 @@ class Bot {
   private client: Socket = createSocket('udp4');
   private targetServerPort: number;
   private selfServerPort: number;
+  private debug: boolean;
 
   constructor(config: Config = {}) {
     const {
       targetServerPort = 11235,
       selfServerPort = 12450,
       logLevel,
+      debug = false,
     } = config;
     this.targetServerPort = targetServerPort;
     this.selfServerPort = selfServerPort;
-    this.logger = new Logger(logLevel);
+    this.logger = new Logger(debug ? Level.DEBUG : logLevel);
+    this.debug = debug;
   }
 
   /**
@@ -51,10 +55,14 @@ class Bot {
    * @param message message string that will be sent
    */
   public send(message: cq.SentMessage) {
+    // log the send message
+    this.logger.debug(`↗ ${message}`);
+    // messages won't be sent in debug mode
+    if (this.debug) {
+      return;
+    }
     // encode the message and send
     const encodedMessage = cq.encodeMessage(message);
-    // log the send message
-    this.logger.debug(`↗ ${encodedMessage}`);
     this.client.send(
       encodedMessage,
       this.targetServerPort,
