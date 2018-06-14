@@ -123,5 +123,5 @@ class CQAt extends CQMagic {
         return `[CQ:at,qq=${this.QQ}]`;
     }
 }
-CQAt.PATTERN = /\[cq:at,qq=(\d+?)\]/;
+CQAt.PATTERN = /\[CQ:at,qq=(\d+?)\]/;
 exports.CQAt = CQAt;

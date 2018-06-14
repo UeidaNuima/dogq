@@ -275,7 +275,7 @@ export class CQImage extends CQMagic {
 
 export class CQAt extends CQMagic {
   private QQ: string;
-  public static PATTERN = /\[cq:at,qq=(\d+?)\]/;
+  public static PATTERN = /\[CQ:at,qq=(\d+?)\]/;
   constructor(QQ: string) {
     super();
     this.QQ = QQ;
