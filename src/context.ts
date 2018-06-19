@@ -1,9 +1,9 @@
 import Bot from '.';
 import {
   RecvMessage,
-  SentPrivateMessage,
-  SentGroupMessage,
-  SentDiscussMessage,
+  SendPrivateMessage,
+  SendGroupMessage,
+  SendDiscussMessage,
 } from './cqsdk';
 
 /**
@@ -28,26 +28,26 @@ export class Context {
     switch (this.message.type) {
       case 'RecvPrivateMessage':
         this.bot.send({
-          type: 'SentPrivateMessage',
+          type: 'SendPrivateMessage',
           QQ: this.message.QQ,
           text,
-        } as SentPrivateMessage);
+        } as SendPrivateMessage);
         return;
       case 'RecvGroupMessage':
         this.bot.send({
-          type: 'SentGroupMessage',
+          type: 'SendGroupMessage',
           QQ: this.message.QQ,
           group: this.message.group,
           text,
-        } as SentGroupMessage);
+        } as SendGroupMessage);
         return;
       case 'RecvDiscussMessage':
         this.bot.send({
-          type: 'SentDiscussMessage',
+          type: 'SendDiscussMessage',
           QQ: this.message.QQ,
           discuss: this.message.discuss,
           text,
-        } as SentDiscussMessage);
+        } as SendDiscussMessage);
         return;
       default:
         this.bot.logger.error('Replied unreplyable message.');
