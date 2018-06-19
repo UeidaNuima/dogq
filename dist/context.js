@@ -16,14 +16,14 @@ class Context {
         switch (this.message.type) {
             case 'RecvPrivateMessage':
                 this.bot.send({
-                    type: 'SentPrivateMessage',
+                    type: 'SendPrivateMessage',
                     QQ: this.message.QQ,
                     text,
                 });
                 return;
             case 'RecvGroupMessage':
                 this.bot.send({
-                    type: 'SentGroupMessage',
+                    type: 'SendGroupMessage',
                     QQ: this.message.QQ,
                     group: this.message.group,
                     text,
@@ -31,7 +31,7 @@ class Context {
                 return;
             case 'RecvDiscussMessage':
                 this.bot.send({
-                    type: 'SentDiscussMessage',
+                    type: 'SendDiscussMessage',
                     QQ: this.message.QQ,
                     discuss: this.message.discuss,
                     text,

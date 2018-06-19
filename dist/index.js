@@ -122,9 +122,9 @@ class Bot {
             fn(ctx);
         });
         // heart beat for every 30 seconds
-        this.send({ type: 'SentClientHello', port: this.selfServerPort });
+        this.send({ type: 'SendClientHello', port: this.selfServerPort });
         setInterval(() => {
-            this.send({ type: 'SentClientHello', port: this.selfServerPort });
+            this.send({ type: 'SendClientHello', port: this.selfServerPort });
         }, 30000);
         this.server.on('error', (err) => {
             if (err.errno === 'EADDRINUSE') {

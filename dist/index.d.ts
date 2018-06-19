@@ -15,8 +15,8 @@ export interface Config {
 export interface Matcher {
     type?: RegExp | string;
     QQ?: RegExp | string;
-    groupID?: RegExp | string;
-    discussID?: RegExp | string;
+    group?: RegExp | string;
+    discuss?: RegExp | string;
     operatedQQ?: RegExp | string;
     text?: RegExp | string;
 }
@@ -39,7 +39,7 @@ declare class Bot {
      * Send message to coolq host.
      * @param message message string that will be sent
      */
-    send(message: cq.SentMessage): void;
+    send(message: cq.SendMessage): void;
     /**
      * Add a middleware.
      * @param middleware middleware function

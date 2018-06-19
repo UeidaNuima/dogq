@@ -78,22 +78,22 @@ exports.decodeMessage = decodeMessage;
  */
 function encodeMessage(message) {
     switch (message.type) {
-        case 'SentPrivateMessage':
+        case 'SendPrivateMessage':
             return `PrivateMessage ${message.QQ} ${encodeString(message.text)}`;
-        case 'SentGroupMessage':
+        case 'SendGroupMessage':
             return `GroupMessage ${message.group} ${encodeString(message.text)}`;
-        case 'SentDiscussMessage':
+        case 'SendDiscussMessage':
             return `DiscussMessage ${message.discuss} ${encodeString(message.text)}`;
-        case 'SentClientHello':
+        case 'SendClientHello':
             return `ClientHello ${message.port}`;
-        case 'SentGroupKick':
+        case 'SendGroupKick':
             return `GroupKick ${message.group} ${message.QQ} ${message.reject ? 1 : 0}`;
-        case 'SentGroupBan':
+        case 'SendGroupBan':
             return `GroupBan ${message.group} ${message.QQ} ${message.duration *
                 1000}`;
-        case 'SentGroupWholeBan':
+        case 'SendGroupWholeBan':
             return `GroupWholeBan ${message.group} ${message.enable ? 1 : 0}`;
-        case 'SentGroupCard':
+        case 'SendGroupCard':
             return `GroupCard ${message.group} ${message.QQ} ${encodeString(message.card)}`;
         default:
             return 'UnknownMessage';
